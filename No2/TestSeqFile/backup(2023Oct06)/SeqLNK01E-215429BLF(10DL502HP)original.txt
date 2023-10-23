@@ -1,0 +1,73 @@
+CUSTOMER P/N:	10DL12H	TestSpecification Rev C																																																																							
+SVI P/N:	LNK908-213300ALF																																																																								
+CREATED DATE:	19-Mar-15																																																																								
+SW REV.:	1.000																																																																								
+TEST SEQ REV.:	1.000																																																																								
+Index	 Step#	Descriptions	FailedCode	Equipment	Command	Action 	Low Limit	High Limit	Unit	Type	Test Loop	Compensate	Remarks	RLY Status																																																											
+1	0	Initial				STEP																																																																			
+2		Enter to SINGLE SEQ mode		DSO1072B	:RUN	TEST																																																																			
+3		"ON 1,2 to APPLY 13.2VDC to FIXTURE"		RELAY	Bb001t	TEST																																																																			
+4		"ON 9 (Ctrl. SRLY8,10,12,14A to connect STK500 to DUT)"		RELAY	Bb006t	TEST																																																																			
+5		"ON 1,2 to APPLY 13.2VDC to FIXTURE"		RELAY	Bb004t	TEST																																																																			
+6		Program test software	F1	STM8		TEST	1	1		BLE																																																															
+7		"ON 1,2 to APPLY 13.2VDC to FIXTURE"		RELAY	Bb006f	TEST																																																																			
+8		"ON 1,2 to APPLY 13.2VDC to FIXTURE"		RELAY	Bb004f	TEST																																																																			
+9	Test 5.2	CONF RES Meas.		34410A	CONF:RES 1000	TEST																																																																			
+10		"ON 3,5 (Connect DMM+HI & DMM_COM to Meas Res. btw J3&TP4)"		RELAY	Bb002t	TEST																																																																			
+11		wait 2 s		DELAY	10000	TEST																																																																			
+12		Meas RES at J3 & TP4	F2	34410A	READ?	TEST	10	17	RES	DPO1																																																															
+13		"OFF 3,5 (Connect DMM+HI & DMM_COM to Meas Res. btw J3&TP4)"		RELAY	Bb002f	TEST																																																																			
+14	Test 5.3	CONF RES Meas.		34410A	CONF:RES 100000	TEST																																																																			
+15		"ON 28,30 (Connect DMM+HI & DMM_COM to Meas Res. btw TP14&TP4)"		RELAY	Bb023t	TEST																																																																			
+16		ON 12 (Connect DMM+HI & DMM_COM to Meas Res. btw TP14&TP4)		RELAY	Bb009t	TEST																																																																			
+17		Meas RES at TP14  & TP4	F3	34410A	READ?	TEST	12000	18500	RES	DPO1																																																															
+18		OFF 12 (Diconnect DMM+HI & DMM_COM to Meas Res. btw TP14&TP4)		RELAY	Bb009f	TEST																																																																			
+19	Test 5.4	ON 31 (Connect DMM+HI & DMM_COM to Meas Res. btw TP15&TP4)		RELAY	Bb041t	TEST																																																																			
+20		Meas RES at TP15  & TP4	F4	34410A	READ?	TEST	12000	18500	RES	DPO1																																																															
+21		OFF 31 (Disconnect DMM+HI & DMM_COM to Meas Res. btw TP15&TP4)		RELAY	Bb041f	TEST																																																																			
+22		"OFF 28,30 (Disconnect DMM+HI & DMM_COM to Meas Res. btw TP14&TP4)"		RELAY	Bb023f	TEST																																																																			
+23	Test 5.5	CONF 34410A to current meas. Mode		34410A	CONF:CURR:DC 0.01	TEST																																																																			
+24		"ON 8 (Ctrl. SRLY1,3A  for DUT input current measurement)"		RELAY	Bb005t	TEST																																																																			
+25		Meas supply current consumption	F5	34410A	READ?	TEST	0.005	0.011	CUR	DPO1																																																															
+26		"OFF 8 (Ctrl. SRLY1,3A  for DUT input current measurement)"		RELAY	Bb005f	TEST																																																																			
+27	Test 5.6	CONF 34410A to Voltage meas. Mode		34410A	CONF:VOLT:DC 100	TEST																																																																			
+28		ON 7 (SRLY2A for Supply 13.2VDC to DUT)		RELAY	Bb004t	TEST																																																																			
+29		"ON 4,6 (Meas ATTiny supply voltage)"		RELAY	Bb003t	TEST																																																																			
+30		Meas voltage at TP8 wrt TP4	F6	34410A	READ?	TEST	4.5	5	VOLT	DPO1																																																															
+31		"OFF 4,6 (Meas ATTiny supply voltage)"		RELAY	Bb003f	TEST																																																																			
+32	Test 5.7	"ON 27,29 (Meas O/P voltage from OPAMP TP2 wpt. TP4)"		RELAY	Bb022t	TEST																																																																			
+33		Meas voltage at TP2 wrt TP4 (OPAMP O/P volatge)	F7	34410A	READ?	TEST	2.15	2.45	VOLT	DPO1																																																															
+34		"OFF 27,29 (Meas O/P voltage from OPAMP TP2 wpt. TP4)"		RELAY	Bb022f	TEST																																																																			
+35	Test 5.8	ON 11 (Ctrl. SRLY6A to Supply 5V1 to TP10)		RELAY	Bb008t	TEST																																																																			
+36		ON 12 (Ctrl. SRLY4B to meas. volt at TP14 wrt TP4)		RELAY	Bb009t	TEST																																																																			
+37		"ON 28,30 (Connect DMM+&DMM- to SRLY4B(Meas volt at TP14 wpt TP4))"		RELAY	Bb023t	TEST																																																																			
+38		Meas voltage at TP14 wrt TP4	F8	34410A	READ?	TEST	11.6	13	VOLT	DPO1																																																															
+39		"OFF 28,30 (Connect DMM+&DMM- to SRLY4B(Meas volt at TP14 wpt TP4))"		RELAY	Bb023f	TEST																																																																			
+40		OFF 12 (Ctrl. SRLY4B to meas. volt at TP14 wrt TP4)		RELAY	Bb009f	TEST																																																																			
+41	Test 5.9	ON 14 (Ctrl. SRLY14B to connect OSC CH2 to TP15 wrt TP4)		RELAY	Bb011t	TEST																																																																			
+42		Meas OSC calibrated frequenc at TP15 wrt TP4	F9	DSO1072B	:MEAS:FREQ? CHAN2	TEST	970	1030	Hz	DPO1																																																															
+43		OFF 14 (Ctrl. SRLY14B to connect OSC CH2 to TP15 wrt TP4)		RELAY	Bb011f	TEST																																																																			
+44		OFF 11 (Ctrl. SRLY6A to Supply 5V1 to TP10)		RELAY	Bb008f	TEST																																																																			
+45		Test ID 11-Meas O/P freq at Hall A				STEP																																																																			
+46		"ON 23,24 (Supply 12VDC to 5000 RPM MOTOR (CW)"		RELAY	Bb017t	TEST																																																																			
+47		Set time base of DSO1072B to 10mS		DSO1072B	:TIM:SCAL 0.005	TEST																																																																			
+48		ON 13 (Ctrl. SRLY6B to connect OSC CH1 to TP14 wrt TP4)		RELAY	Bb010t	TEST																																																																			
+49		ON 14 (Ctrl. SRLY14B to connect OSC CH2 to TP15 wrt TP4)		RELAY	Bb011t	TEST																																																																			
+50		Meas O/P freq. at TP14 wrt TP4	F10	DSO1072B	:MEAS:FREQ? CHAN1	TEST	74700	91300	Hz	DPO1																																																															
+51		Test ID 12-Meas duty cycle at Hall A				STEP																																																																			
+52		Meas duty cycle at TP14 wrt TP4	F11	DSO1072B	:MEAS:PDUT? CHAN1	TEST	45	55	%	DPO1																																																															
+53		Meas O/P freq. at TP15 wrt TP4	F12	DSO1072B	:MEAS:FREQ? CHAN2	TEST	74700	91300	Hz	DPO1																																																															
+54		Test ID 14-Meas duty cycle at Hall B				STEP																																																																			
+55		Meas duty cycle at TP15 wrt TP4	F13	DSO1072B	:MEAS:PDUT? CHAN2	TEST	45	55	%	DPO1																																																															
+56		Test ID 15-Meas phase between Hall A and Hall B				STEP																																																																			
+57		Meas phase between TP14 and TP15	F14	DSO1072B	":MEAS:PPHA? CHAN2,CHAN1"	TEST	81	99	Degree	DPO1																																																															
+58		"ON 9 (Ctrl. SRLY8,10,12,14A to connect STK500 to DUT)"		RELAY	Bb006t	TEST																																																																			
+59		"ON 1,2 to APPLY 13.2VDC to FIXTURE"		RELAY	Bb001f	TEST																																																																			
+60		"ON 1,2 to APPLY 13.2VDC to FIXTURE"		RELAY	Bb004f	TEST																																																																			
+61		"ON 1,2 to APPLY 13.2VDC to FIXTURE"		RELAY	Bb001t	TEST																																																																			
+62		"ON 1,2 to APPLY 13.2VDC to FIXTURE"		RELAY	Bb004t	TEST																																																																			
+63		Program test software	F15	APPLICATIONSW		TEST	1	1		BLE																																																															
+64		"OFF 9 (Ctrl. SRLY8,10,12,14A to connect STK500 to DUT)"		RELAY	Bb006f	TEST																																																																			
+65		OFF 7 (SRLY2A for Supply 13.2VDC to DUT)		RELAY	Bb004f	TEST																																																																			
+66		Clear all relays		RELAY	Bb000	TEST																																																																			
+67						END																																																																			

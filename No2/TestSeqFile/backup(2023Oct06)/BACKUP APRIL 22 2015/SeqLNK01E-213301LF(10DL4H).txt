@@ -1,0 +1,43 @@
+CUSTOMER P/N:	10DL5H	TestSpecification Rev C												
+SVI P/N:	LNK01E-213299LF													
+CREATED DATE:	19-มี.ค.-15													
+SW REV.:	1.000													
+TEST SEQ REV.:	1.000													
+Index	 Step#	Descriptions	FailedCode	Equipment	Command	Action 	Low Limit	High Limit	Unit	Type	Test Loop	Compensate	Remarks	RLY Status
+1	0	Initial				STEP								
+2		Clear all relays		RELAY	@b000	TEST								
+6		SEL 35V RANGE on E3643A		E3643A	VOLT:RANG LOW	TEST								
+7		SEL 14VDC 100mA		E3643A	"APPL 14.0,0.1"	TEST								
+8		TURN ON E3643A		E3643A	OUTP ON	TEST								
+9		"ON 25,26 to APPLY 14VDC to FIXTURE"		RELAY	@b021t	TEST								
+10		ON 31 to CTRL SRLY0101 to to bypass 0V to J1.3(DUT_GND)		RELAY	@b024t	TEST								
+11		CONF 34410A to 10VDC Meas.		34410A	CONF:VOLT:DC 10	TEST								
+12		ON 35 to CTRL SRLY0505 to bypass 14VDC to 4K7 RES and J1.1 (S3)		RELAY	@b028t	TEST								
+13		ON 37 to CTRL SRLY1010 to connect DMM to J1.1 & J1.3		RELAY	@b030t	TEST								
+14		Meas volt at J1.1 & J1.3		34410A	READ?	TEST	2.6	3.0	VDC	DPO1				
+15		OFF 35 to CANCLE CTRL SRLY0505		RELAY	@b028f	TEST								
+16		OFF 37 to CANCLE CTRL SRLY1010		RELAY	@b030f	TEST								
+17		ON 33 to CTRL SRLY0303 to bypass 14VDC to 4K7 RES and J1.2 (S2)		RELAY	@b026t	TEST								
+18		ON 40 to CTRL SRLY1313 to connect DMM to J1.2 & J1.3		RELAY	@b033t	TEST								
+19		Meas volt at J1.2 & J1.3		34410A	READ?	TEST	2.6	3.0	VDC	DPO1				
+20		OFF 33 to CANCLE CTRL SRLY0303		RELAY	@b026f	TEST								
+21		OFF 40 to CANCLE CTRL SRLY1313		RELAY	@b033f	TEST								
+22		ON 38 to CTRL. SRLY11 to connect OSC_CH2 to J1.1&J1.3		RELAY	@b031t	TEST								
+35		ON 41 to CTRL. SRLY14 to connect OSC_CH1 to J1.2&J1.3		RELAY	@b034t	TEST								
+25		ON 42 to CTRL. SRLY0707 to bypass 14V to J1.4(DUT_VCC)		RELAY	@b035t	TEST								
+26		Wait 250mS		DELAY	250	TEST								
+34		"ON 47,48 to Rotate MOT"		RELAY	@b040t	TEST								
+37		Set trigger source to CH1		DSO1072B	:TRIG:EDGE:SOUR CHAN1	TEST								
+38		Set trigger level to 2.5V		DSO1072B	:TRIG:EDGE:LEV 2.5	TEST								
+39		Set time base to 200mS		DSO1072B	:TIM:SCAL 0.2	TEST								
+32		Wait 250 mS		DELAY	3000	TEST								
+40		Meas PWIDTH J1.2		DSO1072B	:MEAS:PDUT? CHAN1	TEST	40	60	%	DPO1				
+41		Meas NWIDTH J1.2		DSO1072B	:MEAS:NDUT? CHAN1	TEST	40	60	%	DPO1				
+42		Meas Max. Amp. Hall Pulse J1.2		DSO1072B	:MEAS:VTOP? CHAN1	TEST	5.4	5.8	VDC	DPO1				
+43		Meas Min. Amp. Hall Pulse J1.2		DSO1072B	:MEAS:VBAS? CHAN1	TEST	-0.5	0.3	VDC	DPO1				
+44		Meas PWIDTH J1.1		DSO1072B	:MEAS:PDUT? CHAN2	TEST	40	60	%	DPO1				
+45		Meas NWIDTH J1.1		DSO1072B	:MEAS:NDUT? CHAN2	TEST	40	60	%	DPO1				
+46		Meas Max. Amp. Hall Pulse J1.1		DSO1072B	:MEAS:VTOP? CHAN2	TEST	5.4	5.8	VDC	DPO1				
+47		Meas Min. Amp. Hall Pulse J1.1		DSO1072B	:MEAS:VBAS? CHAN2	TEST	-0.5	0.3	VDC	DPO1				
+48		Clear all relays		RELAY	@b000	TEST								
+49						END								

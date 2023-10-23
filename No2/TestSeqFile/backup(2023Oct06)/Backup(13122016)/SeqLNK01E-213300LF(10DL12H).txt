@@ -1,0 +1,108 @@
+CUSTOMER P/N:	10DL12H	TestSpecification Rev C												
+SVI P/N:	LNK908-213300ALF													
+CREATED DATE:	19-Mar-15													
+SW REV.:	1.000													
+TEST SEQ REV.:	1.000													
+Index	 Step#	Descriptions	FailedCode	Equipment	Command	Action 	Low Limit	High Limit	Unit	Type	Test Loop	Compensate	Remarks	RLY Status
+1	0	Initial				STEP								
+2		SET VOTAGE KORAD 5V1		KA3003P	VSET1:5.1	TEST								
+3		SET CURRENT KORAD 500mA		KA3003P	ISET1:0.05	TEST								
+4		ON KORAD		KA3003P	OUT1	TEST								
+5		SEL 14VDC 100mA		E3643A	"APPL 13.2,0.1"	TEST								
+6		TURN ON E3643A		E3643A	OUTP ON	TEST								
+7		Enter to SINGLE SEQ mode		DSO1072B	:RUN	TEST								
+8		"ON 1,2 to APPLY 13.2VDC to FIXTURE"		RELAY	@b001t	TEST								
+10		"ON 9 (Ctrl. SRLY8,10,12,14A to connect STK500 to DUT)"		RELAY	@b006t	STEP								
+11		Program test software	F1	STK500	TEST_FW	STEP	Programming complete!	Programming complete!	MESS	STR1				
+12		"OFF 9 (Ctrl. SRLY8,10,12,14A to connect STK500 to DUT)"		RELAY	@b006f	STEP								
+14	Test 5.2	CONF RES Meas.		34410A	CONF:RES 100	TEST								
+15		"ON 3,5 (Connect DMM+HI & DMM_COM to Meas Res. btw J3&TP4)"		RELAY	@b002t	TEST								
+16		Meas RES at J3 & TP4	F2	34410A	READ?	TEST	10	16	RES	DPO1				
+17		"OFF 3,5 (Connect DMM+HI & DMM_COM to Meas Res. btw J3&TP4)"		RELAY	@b002f	TEST								
+14	Test 5.3	CONF RES Meas.		34410A	CONF:RES 100000	TEST								
+15		"ON 28,30 (Connect DMM+HI & DMM_COM to Meas Res. btw TP14&TP4)"		RELAY	@b023t	TEST								
+15		ON 12 (Connect DMM+HI & DMM_COM to Meas Res. btw TP14&TP4)		RELAY	@b009t	TEST								
+16		Meas RES at TP14  & TP4	F2	34410A	READ?	TEST	12000	185000	RES	DPO1				
+15		OFF 12 (Diconnect DMM+HI & DMM_COM to Meas Res. btw TP14&TP4)		RELAY	@b009f	TEST								
+15	Test 5.4	ON 31 (Connect DMM+HI & DMM_COM to Meas Res. btw TP15&TP4)		RELAY	@b041t	TEST								
+16		Meas RES at TP15  & TP4	F2	34410A	READ?	TEST	12000	185000	RES	DPO1				
+15		OFF 31 (Disconnect DMM+HI & DMM_COM to Meas Res. btw TP15&TP4)		RELAY	@b041f	TEST								
+17		"OFF 28,30 (Disconnect DMM+HI & DMM_COM to Meas Res. btw TP14&TP4)"		RELAY	@b023f	TEST								
+19	Test 5.5	CONF 34410A to current meas. Mode		34410A	CONF:CURR:DC 0.1	TEST								
+21		"ON 8 (Ctrl. SRLY1,3A  for DUT input current measurement)"		RELAY	@b005t	TEST								
+22		Wait 1000mS		DELAY	1000	STEP								
+23		Meas supply current consumption	F3	34410A	READ?	TEST	0.007	0.009	CUR	DPO1				
+24		Wait 500mS		DELAY	500	TEST								
+21		"OFF 8 (Ctrl. SRLY1,3A  for DUT input current measurement)"		RELAY	@b005f	TEST								
+19	Test 5.6	CONF 34410A to Voltage meas. Mode		34410A	CONF:VOLT:DC 100	TEST								
+30		ON 7 (SRLY2A for Supply 13.2VDC to DUT)		RELAY	@b004t	TEST								
+30		"ON 4,6 (Meas ATTiny supply voltage)"		RELAY	@b003t	TEST								
+22		Wait 1000mS		DELAY	1000	STEP								
+31		Meas voltage at TP8 wrt TP4	F4	34410A	READ?	TEST	4.5	5	VOLT	DPO1				
+22		Wait 1000mS		DELAY	1000	STEP								
+30		"OFF 4,6 (Meas ATTiny supply voltage)"		RELAY	@b003f	TEST								
+34	Test 5.7	"ON 27,29 (Meas O/P voltage from OPAMP TP2 wpt. TP4)"		RELAY	@b022t	TEST								
+35		Meas voltage at TP2 wrt TP4 (OPAMP O/P volatge)	F5	34410A	READ?	TEST	2.15	2.45	VOLT	DPO1				
+36		"OFF 27,29 (Meas O/P voltage from OPAMP TP2 wpt. TP4)"		RELAY	@b022f	TEST								
+38	Test 5.8	ON 11 (Ctrl. SRLY6A to Supply 5V1 to TP10)		RELAY	@b008t	TEST								
+41		Wait 1000mS		DELAY	1000	TEST								
+40		ON 12 (Ctrl. SRLY4B to meas. volt at TP14 wrt TP4)		RELAY	@b009t	TEST								
+39		"ON 28,30 (Connect DMM+&DMM- to SRLY4B(Meas volt at TP14 wpt TP4))"		RELAY	@b023t	TEST								
+42		Meas voltage at TP14 wrt TP4	F6	34410A	READ?	TEST	11.6	13	VOLT	DPO1				
+41		Wait 1000mS		DELAY	1000	TEST								
+43		"OFF 28,30 (Connect DMM+&DMM- to SRLY4B(Meas volt at TP14 wpt TP4))"		RELAY	@b023f	TEST								
+44		OFF 12 (Ctrl. SRLY4B to meas. volt at TP14 wrt TP4)		RELAY	@b009f	TEST								
+46	Test 5.9	ON 14 (Ctrl. SRLY14B to connect OSC CH2 to TP15 wrt TP4)		RELAY	@b011t	TEST								
+47		Meas OSC calibrated frequenc at TP15 wrt TP4	F7	DSO1072B	:MEAS:FREQ? CHAN2	TEST	970	1030	Hz	DPO1				
+48		OFF 14 (Ctrl. SRLY14B to connect OSC CH2 to TP15 wrt TP4)		RELAY	@b011f	TEST								
+38		OFF 11 (Ctrl. SRLY6A to Supply 5V1 to TP10)		RELAY	@b008f	TEST								
+46	Test 5.10	ON 15 (Ctrl. SRLY12B to connect OSC CH2 to TP1 wrt TP4)		RELAY	@b012t	TEST								
+48		Set time base of DSO1072B to 500uS		DSO1072B	:TIM:SCAL 0.005	TEST								
+49		Set HOR delay to 10mS		DSO1072B	:TIM:MAIN:OFFS  0.035	TEST								
+52		"ON 23,24 (Supply 12VDC to 5000 RPM MOTOR (CW)"		RELAY	@b017t	TEST								
+53		Wait 250mS		DELAY	1000	TEST								
+50		Enter to SINGLE SEQ mode		DSO1072B	:SINGLE	TEST								
+51		Wait 250mS		DELAY	1000	TEST								
+54		"OFF 23,24 (Supply 12VDC to 5000 RPM MOTOR (CW)"		RELAY	@b017f	TEST								
+55		Extract DL12 Hall WF CW		DSO1072B_HALL_WF	GET_WF_CW	TEST								
+56		Clockwise 2V9	F8	DSO1072B_HALL_WF	2V9	TEST	2.61	3.19	V	DPO1				
+57		Clockwise 1V3	F9	DSO1072B_HALL_WF	1V3	TEST	1.17	1.43	V	DPO1				
+58		Clockwise 2V1	F10	DSO1072B_HALL_WF	2V1	TEST	1.89	2.31	V	DPO1				
+59		Clockwise 4V8	F11	DSO1072B_HALL_WF	4V8	TEST	4.32	5.28	V	DPO1				
+98						END								
+62		"ON 47,48 (Supply 12VDC to 5000 RPM MOTOR (CCW)"		RELAY	@b040t	TEST								
+63		Wait 250mS		DELAY	1000	TEST								
+60		Enter to SINGLE SEQ mode		DSO1072B	:SINGLE	TEST								
+61		Wait 250mS		DELAY	1000	TEST								
+64		"OFF 47,48 (Supply 12VDC to 5000 RPM MOTOR (CCW)"		RELAY	@b040f	TEST								
+65		Extract DL12 Hall WF CCW		DSO1072B_HALL_WF	GET_WF_CCW	TEST								
+66		Clockwise 2V9	F12	DSO1072B_HALL_WF	2V9	TEST	2.61	3.19	V	DPO1				
+67		Clockwise 1V3	F13	DSO1072B_HALL_WF	1V3	TEST	1.17	1.43	V	DPO1				
+68		Clockwise 2V1	F14	DSO1072B_HALL_WF	2V1	TEST	1.89	2.31	V	DPO1				
+69		Clockwise 4V8	F15	DSO1072B_HALL_WF	4V8	TEST	4.32	5.28	V	DPO1				
+70		OFF 15 (Ctrl. SRLY12B to connect OSC CH2 to TP1 wrt TP4)		RELAY	@b012f	TEST								
+71		Enter to SINGLE SEQ mode		DSO1072B	:KEY:RUN	TEST								
+76		Clockwise 4V8	F15	DSO1072B_HALL_WF	4V8	TEST	4.32	5.28	V	DPO1				
+77		OFF 15 (Ctrl. SRLY12B to connect OSC CH2 to TP1 wrt TP4)		RELAY	@b012f	TEST								
+78		Enter to SINGLE SEQ mode		DSO1072B	:KEY:RUN	TEST								
+79		Test ID 11-Meas O/P freq at Hall A				STEP								
+80		"ON 23,24 (Supply 12VDC to 5000 RPM MOTOR (CW)"		RELAY	@b020t	TEST								
+81		Set time base of DSO1072B to 10mS		DSO1072B	:TIM:SCAL 0.005	TEST								
+82		Wait 1000mS		DELAY	1000	TEST								
+83		ON 13 (Ctrl. SRLY6B to connect OSC CH1 to TP14 wrt TP4)		RELAY	@b010t	TEST								
+84		ON 14 (Ctrl. SRLY14B to connect OSC CH2 to TP15 wrt TP4)		RELAY	@b011t	TEST								
+85		Meas O/P freq. at TP14 wrt TP4	F16	DSO1072B	:MEAS:FREQ? CHAN1	TEST	74700	91300	Hz	DPO1				
+86		Test ID 12-Meas duty cycle at Hall A				STEP								
+87		Meas duty cycle at TP14 wrt TP4	F17	DSO1072B	:MEAS:PDUT? CHAN1	TEST	45	55	%	DPO1				
+88		Meas O/P freq. at TP15 wrt TP4	F18	DSO1072B	:MEAS:FREQ? CHAN2	TEST	74700	91300	Hz	DPO1				
+89		Test ID 14-Meas duty cycle at Hall B				STEP								
+90		Meas duty cycle at TP15 wrt TP4	F19	DSO1072B	:MEAS:PDUT? CHAN2	TEST	45	55	%	DPO1				
+91		Test ID 15-Meas phase between Hall A and Hall B				STEP								
+92		Meas phase between TP14 and TP15	F20	DSO1072B	":MEAS:PPHA? CHAN2,CHAN1"	TEST	81	99	Degree	DPO1				
+93		Clear all relays		RELAY	@s	TEST								
+94		"ON 9 (Ctrl. SRLY8,10,12,14A to connect STK500 to DUT)"		RELAY	@b006t	TEST								
+95		Program test software	F21	STK500	APP_FW	TEST	Programming complete!	Programming complete!	MESS	STR1				
+96		"OFF 9 (Ctrl. SRLY8,10,12,14A to connect STK500 to DUT)"		RELAY	@b006f	TEST								
+30		OFF 7 (SRLY2A for Supply 13.2VDC to DUT)		RELAY	@b004f	TEST								
+97		ON KORAD		KA3003P	OUT0	TEST								
+98						END								

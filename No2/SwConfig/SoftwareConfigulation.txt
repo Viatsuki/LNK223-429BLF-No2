@@ -1,0 +1,8 @@
+OperatorId=5
+SerialNumber299=1
+SerialNumber300=1
+SerialNumber301=3
+SerialNumber300A=17
+SerialNumber429=17
+SerialNumber429A=17
+SerialNumber429B=37
